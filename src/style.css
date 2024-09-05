@@ -1,9 +1,10 @@
 :root {
   /* colors */
-  --clr-text-light: #f3b588;
-  --clr-text-light-hover: #e7d3c5;
-  --clr-body-light: #f1eeed;
-  --clr-header-footer-light: #456dad;
+  --clr-text-light: #e2f0ed;
+  --clr-text-light-hover: #ecc5bd;
+  --clr-body-light: #f5edeb;
+  --clr-body-text-light: #420c0d;
+  --clr-header-footer-light: #3d2d66;
 }
 
 html {
@@ -62,15 +63,13 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
-  border: 2px solid red;
 }
 
 .header-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid green;
-  margin: 10px 0;
+  padding: 10px 0;
 }
 
 h1 {
@@ -144,6 +143,65 @@ h1 > a {
   transform: translate(-50%, -50%) rotate(-45deg);
 }
 
+/* main */
+#levels {
+  padding: 40px 10px;
+}
+
+h2 {
+  font-size: 2.7rem;
+  font-weight: 600;
+  color: var(--clr-body-text-light);
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.level {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  margin-top: 20px;
+}
+
+.level > p {
+  font-size: 1.5rem;
+  font-weight: 500;
+  width: 120px;
+  color: var(--clr-body-light);
+  background-color: var(--clr-header-footer-light);
+  text-align: center;
+  padding: 10px 0;
+  border-radius: 5px;
+}
+
+.levels-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.levels-container > a {
+  text-decoration: none;
+}
+
+.level-card {
+  text-align: center;
+}
+
+.level-card > img {
+  width: 70px;
+}
+
+.level-card > p {
+  margin-top: 10px;
+  font-size: 2rem;
+  font-weight: 600;
+
+  color: var(--clr-body-text-light);
+}
+
 /* footer */
 .footer-container {
   display: flex;
@@ -169,7 +227,7 @@ h1 > a {
 @media (max-width: 700px) {
   .navigation {
     position: absolute;
-    top: 80px;
+    top: 75px;
     left: 100%;
     background-color: aquamarine;
     display: block;
@@ -193,12 +251,45 @@ h1 > a {
   .header-container.active .navigation {
     transform: translateX(-100%);
   }
+
+  h2 {
+    font-size: 2.2rem;
+  }
+
+  .level > p {
+    font-size: 1.2rem;
+    font-weight: 400;
+    width: 100px;
+  }
+
+  .level-card > img {
+    width: 50px;
+  }
+
+  .level-card > p {
+    font-size: 1.5rem;
+    font-weight: 500;
+
+    color: var(--clr-body-text-light);
+  }
 }
 
 @media (max-width: 500px) {
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  .level > p {
+    display: none;
+  }
+
+  .level-card > img {
+    width: 40px;
+  }
   .footer-container p {
     font-size: 1.5rem;
   }
+
   .contacts-container img {
     width: 25px;
   }
