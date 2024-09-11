@@ -202,6 +202,44 @@ h2 {
   color: var(--clr-body-text-light);
 }
 
+/* game*/
+
+.game-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid red;
+}
+.game-field {
+  width: 600px;
+  height: 600px;
+  background-color: var(--clr-text-light-hover);
+}
+
+.game-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.game-btn {
+  width: 170px;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--clr-header-footer-light);
+  color: var(--clr-text-light);
+  padding: 7px;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+
+.game-btn:hover {
+  color: var(--clr-text-light-hover);
+}
+
 /* table */
 #table {
   padding: 20px 0 30px;
