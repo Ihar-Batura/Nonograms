@@ -192,6 +192,7 @@ h2 {
 
 .level-card > img {
   width: 70px;
+  height: 70px;
 }
 
 .level-card > p {
@@ -357,6 +358,7 @@ tr:nth-child(2n) > td {
 
   .level-card > img {
     width: 50px;
+    height: 50px;
   }
 
   .level-card > p {
@@ -393,6 +395,7 @@ tr:nth-child(2n) > td {
 
   .level-card > img {
     width: 40px;
+    height: 40px;
   }
   .footer-container p {
     font-size: 1.5rem;
