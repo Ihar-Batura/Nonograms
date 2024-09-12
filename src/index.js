@@ -294,3 +294,81 @@ const nonograms = [
     ],
   },
 ];
+
+/* GAME Field */
+
+const gameField = document.querySelector('.game-field');
+
+function createGameField(game = nonograms[0].matrix) {
+  const rowTopPrompt = document.createElement('div'); // ряд с верхними подсказками
+  rowTopPrompt.className = 'row-top';
+  gameField.appendChild(rowTopPrompt);
+
+  const emptyPlace = document.createElement('div'); // путой квадрат в верхнем ряду с подсказками
+  emptyPlace.className = 'row-prompt';
+  rowTopPrompt.appendChild(emptyPlace);
+
+  // создает верхние подсказки
+  for (let i = 0; i < game.length; i++) {
+    const cellTopPrompt = document.createElement('div'); // создаем элемент для подсказок сверху
+    cellTopPrompt.className = 'top-prompt';
+
+    let counterTop = 0;
+
+    for (let j = 0; j < game.length; j++) {
+      const prompt = document.createElement('span'); // каждую подсказку оборачиваем в спан что бы выстроить их в колонку
+      prompt.className = 'prompt';
+      prompt.innerText = '';
+      if (game[j][i] === 1) {
+        counterTop++;
+        if (j === game.length - 1) {
+          prompt.innerText += counterTop;
+          cellTopPrompt.appendChild(prompt);
+        }
+      } else {
+        if (counterTop > 0) {
+          prompt.innerText += counterTop;
+          cellTopPrompt.appendChild(prompt);
+          counterTop = 0;
+        }
+      }
+    }
+
+    rowTopPrompt.appendChild(cellTopPrompt);
+  }
+
+  // создание ячеек(клеток) для игры
+  for (let i = 0; i < game.length; i++) {
+    const rowCells = document.createElement('div'); // ряд подсказки и игровые клетки
+    rowCells.className = 'row-cells';
+    const rowPrompt = document.createElement('div'); // ряд с подсказками слева
+    rowPrompt.className = 'row-prompt';
+    rowPrompt.innerText = '';
+    rowCells.appendChild(rowPrompt);
+    let counter = 0; // счеткик подсказок слева
+    for (let j = 0; j < game[i].length; j++) {
+      const cell = document.createElement('div'); // создание новой игровой клетки
+      cell.className = 'cell';
+      cell.innerText = game[i][j];
+      if (game[i][j] === 1) {
+        counter++;
+        if (j === game.length - 1) {
+          rowPrompt.innerText += ` ${counter}`;
+        }
+      } else {
+        if (counter > 0) {
+          rowPrompt.innerText += ` ${counter}`;
+          counter = 0;
+        }
+      }
+
+      rowCells.appendChild(cell);
+    }
+
+    gameField.appendChild(rowCells);
+  }
+}
+createGameField();
+
+// console.log(nonograms[0].id);
+// console.log(nonograms[0].matrix);
