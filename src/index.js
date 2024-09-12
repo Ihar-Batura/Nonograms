@@ -300,6 +300,11 @@ const nonograms = [
 const gameField = document.querySelector('.game-field');
 
 function createGameField(game = nonograms[0].matrix) {
+  if (game.length > 10) {
+    gameField.classList.add('big-field');
+  } else {
+    gameField.classList.remove('big-field');
+  }
   const rowTopPrompt = document.createElement('div'); // ряд с верхними подсказками
   rowTopPrompt.className = 'row-top';
   gameField.appendChild(rowTopPrompt);
@@ -311,7 +316,11 @@ function createGameField(game = nonograms[0].matrix) {
   // создает верхние подсказки
   for (let i = 0; i < game.length; i++) {
     const cellTopPrompt = document.createElement('div'); // создаем элемент для подсказок сверху
-    cellTopPrompt.className = 'top-prompt';
+    if (i === 5 || i === 10) {
+      cellTopPrompt.classList = 'top-prompt cell-border'; // добавление толстой линии
+    } else {
+      cellTopPrompt.className = 'top-prompt';
+    }
 
     let counterTop = 0;
 
@@ -340,7 +349,12 @@ function createGameField(game = nonograms[0].matrix) {
   // создание ячеек(клеток) для игры
   for (let i = 0; i < game.length; i++) {
     const rowCells = document.createElement('div'); // ряд подсказки и игровые клетки
-    rowCells.className = 'row-cells';
+    if (i === 5 || i === 10) {
+      rowCells.classList = 'row-cells row-border'; // добавление толстой линии
+    } else {
+      rowCells.classList = 'row-cells';
+    }
+
     const rowPrompt = document.createElement('div'); // ряд с подсказками слева
     rowPrompt.className = 'row-prompt';
     rowPrompt.innerText = '';
@@ -348,7 +362,12 @@ function createGameField(game = nonograms[0].matrix) {
     let counter = 0; // счеткик подсказок слева
     for (let j = 0; j < game[i].length; j++) {
       const cell = document.createElement('div'); // создание новой игровой клетки
-      cell.className = 'cell';
+      if (j === 5 || j === 10) {
+        cell.classList = 'cell cell-border'; // добавление толстой линии
+      } else {
+        cell.className = 'cell';
+      }
+
       cell.innerText = game[i][j];
       if (game[i][j] === 1) {
         counter++;
