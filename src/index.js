@@ -541,3 +541,18 @@ function markCell() {
     })
   );
 }
+
+/* SHOW SOLUTION */
+
+const solutionBtn = document.querySelector('.solution');
+
+solutionBtn.addEventListener('click', () => {
+  gameField.innerHTML = ''; // очишает поле для игры
+  createGameField(gameNow); //отрисовывает этот же уровень
+  const cells = document.querySelectorAll('.cell');
+  cells.forEach((cell) => {
+    if (cell.innerText === '1') {
+      cell.classList.add('fill');
+    }
+  });
+});
