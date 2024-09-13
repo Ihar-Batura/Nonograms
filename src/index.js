@@ -409,3 +409,12 @@ randomBtn.addEventListener('click', function () {
   }
   createGameField(nonograms[numberGame].matrix);
 });
+
+/* CHOOSE A LEVEL */
+const levels = document.querySelectorAll('.levels-container a');
+levels.forEach((level) =>
+  level.addEventListener('click', () => {
+    gameField.innerHTML = ''; // очишает поле для игры
+    createGameField(nonograms[level.id - 1].matrix);
+  })
+);
