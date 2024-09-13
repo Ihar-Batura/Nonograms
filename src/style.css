@@ -509,6 +509,16 @@ span.prompt {
   border: 1px solid black;
 }
 
+.cell.fill {
+  background-color: black;
+}
+
+.cell.cross {
+  background-image: url(./assets/svg/cross.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 .row-border {
   border-top: 2px solid var(--clr-body-text-light);
 }

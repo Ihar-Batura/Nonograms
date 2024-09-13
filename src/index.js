@@ -390,6 +390,8 @@ function createGameField(game = nonograms[0].matrix) {
     gameField.appendChild(rowCells);
   }
   startTimer();
+  fillCell();
+  markCell();
 }
 createGameField();
 
@@ -512,3 +514,30 @@ resetBtn.addEventListener('click', () => {
   gameField.innerHTML = ''; // очишает поле для игры
   createGameField(gameNow); //отрисовывает этот же уровень
 });
+
+/* FILL CELLS */
+
+function fillCell() {
+  const cells = document.querySelectorAll('.cell');
+
+  cells.forEach((cell) =>
+    cell.addEventListener('click', () => {
+      cell.classList.remove('cross');
+      cell.classList.toggle('fill');
+    })
+  );
+}
+
+/* MARK CELLS */
+
+function markCell() {
+  const cells = document.querySelectorAll('.cell');
+
+  cells.forEach((cell) =>
+    cell.addEventListener('contextmenu', (e) => {
+      e.preventDefault();
+      cell.classList.remove('fill');
+      cell.classList.toggle('cross');
+    })
+  );
+}
