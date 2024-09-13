@@ -295,7 +295,7 @@ const nonograms = [
   },
 ];
 
-/* GAME Field */
+/* START GAME and CREATE FIELD */
 
 const gameField = document.querySelector('.game-field');
 
@@ -389,5 +389,23 @@ function createGameField(game = nonograms[0].matrix) {
 }
 createGameField();
 
-// console.log(nonograms[0].id);
-// console.log(nonograms[0].matrix);
+/* RANDOM GAME */
+
+const randomBtn = document.querySelector('.random-game');
+
+function randomNumber(min, max) {
+  return Math.floor(min + Math.random() * (max - min));
+}
+
+randomBtn.addEventListener('click', function () {
+  gameField.innerHTML = ''; // очишает поле для игры
+  let numberLast = 0;
+  let numberGame = randomNumber(0, 14);
+  console.log(numberGame);
+  if (numberLast === numberGame) {
+    // проверка на повторении игры
+    numberGame = randomNumber(0, 14);
+    numberLast = numberGame;
+  }
+  createGameField(nonograms[numberGame].matrix);
+});
