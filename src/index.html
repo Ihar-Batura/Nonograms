@@ -36,7 +36,7 @@
         <section id="levels">
           <h2>Choose a level for the game:</h2>
           <div class="level">
-            <p>Easy (5x5)</p>
+            <p>Easy <span>(5x5)</span></p>
             <div class="levels-container">
               <a id="4" href="#game">
                 <div class="level-card">
@@ -71,7 +71,7 @@
             </div>
           </div>
           <div class="level">
-            <p>Medium (10x10)</p>
+            <p>Medium <span>(10x10)</span></p>
             <div class="levels-container">
               <a id="7" href="#game">
                 <div class="level-card">
@@ -106,7 +106,7 @@
             </div>
           </div>
           <div class="level">
-            <p>Hard (15x15)</p>
+            <p>Hard <span>(15x15)</span></p>
             <div class="levels-container">
               <a id="12" href="#game">
                 <div class="level-card">
@@ -147,9 +147,15 @@
               <div class="game-field"></div>
             </div>
             <div class="game-buttons">
-              <div class="timer">00:00</div>
-              <button class="game-btn">Reset game</button>
-              <button class="game-btn">Show solution</button>
+              <div class="timer">
+                <span class="interval-hours">00</span>
+                <span class="dots">:</span>
+                <span class="interval-minutes">00</span>
+                <span class="dots">:</span>
+                <span class="interval-seconds">00</span>
+              </div>
+              <button class="game-btn reset-button">Reset game</button>
+              <button class="game-btn solution">Show solution</button>
               <button class="game-btn">Sound on/off</button>
               <button class="game-btn">Save game</button>
               <button class="game-btn">Continue last game</button>

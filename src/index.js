@@ -298,8 +298,11 @@ const nonograms = [
 /* START GAME and CREATE FIELD */
 
 const gameField = document.querySelector('.game-field');
+let gameNow;
 
 function createGameField(game = nonograms[0].matrix) {
+  gameNow = game; // кладем  переменную игру для повторной отрисовки через ресет
+
   if (game.length > 10) {
     gameField.classList.add('big-field');
   } else {
@@ -386,6 +389,7 @@ function createGameField(game = nonograms[0].matrix) {
 
     gameField.appendChild(rowCells);
   }
+  startTimer();
 }
 createGameField();
 
@@ -408,6 +412,7 @@ randomBtn.addEventListener('click', function () {
     numberLast = numberGame;
   }
   createGameField(nonograms[numberGame].matrix);
+  resetTimer();
 });
 
 /* CHOOSE A LEVEL */
@@ -416,5 +421,94 @@ levels.forEach((level) =>
   level.addEventListener('click', () => {
     gameField.innerHTML = ''; // очишает поле для игры
     createGameField(nonograms[level.id - 1].matrix);
+    resetTimer();
   })
 );
+
+/* TIMER */
+
+const timerHours = document.querySelector('.interval-hours');
+const timerMinutes = document.querySelector('.interval-minutes');
+const timerSeconds = document.querySelector('.interval-seconds');
+const timerStop = document.querySelector('.solution');
+const timerReset = document.querySelector('.reset-button');
+
+let interval;
+let hours = 0;
+let minutes = 0;
+let seconds = 0;
+
+const startTime = () => {
+  seconds++;
+  timerSeconds.innerHTML = seconds;
+  if (seconds <= 9) {
+    timerSeconds.innerHTML = '0' + seconds;
+  }
+  if (seconds > 9 && seconds <= 99) {
+    timerSeconds.innerHTML = seconds;
+  }
+  if (seconds == 100) {
+    timerSeconds.innerHTML = '00';
+    minutes++;
+    timerMinutes.innerHTML = '0' + minutes;
+    seconds = 0;
+  }
+  if (minutes > 9) {
+    timerMinutes.innerHTML = minutes;
+  }
+
+  if (minutes > 59) {
+    hours++;
+    timerHours.innerHTML = '0' + hours;
+    minutes = 0;
+    timerMinutes.innerHTML = '0' + minutes;
+  }
+  if (hours > 9) {
+    timerHours.innerHTML = hours;
+  }
+};
+
+let flagTimer; // флаг для первого запуска таймера
+function startTimer() {
+  const timerStart = document.querySelectorAll('.cell');
+
+  // Запускает таймер
+  timerStart.forEach((cell) =>
+    cell.addEventListener('click', function () {
+      if (!flagTimer) {
+        // не затормаживает таймер при повторном клике
+        clearInterval(interval); //не дает ускоряться интервалу!
+        interval = setInterval(startTime, 1000);
+        flagTimer = true;
+      }
+    })
+  );
+}
+
+//Останавливает таймер
+timerStop.addEventListener('click', function () {
+  clearInterval(interval);
+});
+
+function resetTimer() {
+  clearInterval(interval);
+  hours = 0;
+  minutes = 0;
+  seconds = 0;
+  timerHours.innerHTML = '00';
+  timerMinutes.innerHTML = '00';
+  timerSeconds.innerHTML = '00';
+  flagTimer = false; // меняет флаг что бы можно было снова запустить таймер
+}
+
+// Сбрасывает таймер при новой игре
+timerReset.addEventListener('click', resetTimer);
+
+/* RESET GAME */
+
+const resetBtn = document.querySelector('.reset-button');
+
+resetBtn.addEventListener('click', () => {
+  gameField.innerHTML = ''; // очишает поле для игры
+  createGameField(gameNow); //отрисовывает этот же уровень
+});
