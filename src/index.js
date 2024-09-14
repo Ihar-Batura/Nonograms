@@ -392,6 +392,7 @@ function createGameField(game = nonograms[0].matrix) {
   startTimer();
   fillCell();
   markCell();
+  checkWin();
 }
 createGameField();
 
@@ -556,3 +557,34 @@ solutionBtn.addEventListener('click', () => {
     }
   });
 });
+
+/* WIN CHECK*/
+
+function checkWin() {
+  const checkWinCells = document.querySelectorAll('.cell');
+  checkWinCells.forEach((checkCell) => {
+    checkCell.addEventListener('click', winGame);
+  });
+
+  function winGame() {
+    const cells = document.querySelectorAll('.cell');
+    let count = 0;
+    cells.forEach((cell) => {
+      if (cell.innerText === '1') {
+        count++;
+        console.log(count);
+        if (cell.innerText === '1' && cell.classList.value.includes('fill')) {
+          count--;
+          console.log(count);
+        }
+      }
+      if (cell.innerText === '0' && cell.classList.value.includes('fill')) {
+        count++;
+        console.log(count);
+      }
+    });
+    if (count === 0) {
+      console.log('win');
+    }
+  }
+}
