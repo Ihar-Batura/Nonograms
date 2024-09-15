@@ -572,19 +572,39 @@ function checkWin() {
     cells.forEach((cell) => {
       if (cell.innerText === '1') {
         count++;
-        console.log(count);
         if (cell.innerText === '1' && cell.classList.value.includes('fill')) {
           count--;
-          console.log(count);
         }
       }
       if (cell.innerText === '0' && cell.classList.value.includes('fill')) {
         count++;
-        console.log(count);
       }
     });
     if (count === 0) {
-      console.log('win');
+      showModal();
     }
   }
+  //логика - проходим по ячейкам, если содержимое ячейки 1 и она закрашена отнимаем один от счетчкика( если ноль закрашен добавляем 1)
 }
+
+/* MODAL WINDOW*/
+function showModal() {
+  const modal = document.querySelector('.modal');
+  const modalTime = document.querySelector('.modal-time');
+  const hours = document.querySelector('.interval-hours').innerHTML;
+  const minutes = document.querySelector('.interval-minutes').innerHTML;
+  const seconds = document.querySelector('.interval-seconds').innerHTML;
+  modalTime.innerText = `${hours}:${minutes}:${seconds}`;
+  modal.classList.add('show-modal');
+  clearInterval(interval); // stop timer
+}
+
+const playAgainBtn = document.querySelector('.modal-btn');
+
+playAgainBtn.addEventListener('click', () => {
+  const modal = document.querySelector('.modal');
+  modal.classList.remove('show-modal');
+  gameField.innerHTML = ''; // очишает поле для игры
+  createGameField(gameNow); //отрисовывает этот же уровень (кнопка play again подразумевает играть этот же уровень)
+  resetTimer(); // сбрасываем таймер на ноль
+});
