@@ -598,6 +598,7 @@ function showModal() {
   modal.classList.add('show-modal');
   clearInterval(interval); // stop timer
   saveResult(); // save result in local storage
+  showFiveResults();
 }
 
 const playAgainBtn = document.querySelector('.modal-btn');
@@ -689,7 +690,7 @@ continueGameBtn.addEventListener('click', () => {
   });
 });
 
-/* SAVE LAST 5 RESULTS*/
+/* SAVE LAST RESULT TO LOCAL STORAGE*/
 
 function saveResult() {
   let name;
@@ -723,3 +724,32 @@ function saveResult() {
     localStorage.setItem('resultList', JSON.stringify(resultArray));
   }
 }
+
+/* SHOW 5 THE BEST RESULTS*/
+function showFiveResults() {
+  const arrResults = JSON.parse(localStorage.getItem('resultList'));
+  if (arrResults !== null) {
+    // сортируем массив с результатами
+    let arrSortedResults = arrResults.sort(function (a, b) {
+      if (a.result > b.result) {
+        return 1;
+      }
+      if (a.result < b.result) {
+        return -1;
+      }
+      return 0;
+    });
+
+    const tableList = document.querySelectorAll('tbody tr'); // находим все строки в таблице
+    let count = 0;
+    tableList.forEach((string) => {
+      if (arrSortedResults !== null && arrSortedResults[count] !== undefined) {
+        string.children[0].innerText = arrSortedResults[count].name; // присваеваем значение каждому полю в строке если оно есть
+        string.children[1].innerText = arrSortedResults[count].difficulty;
+        string.children[2].innerText = arrSortedResults[count].result;
+      }
+      count++;
+    });
+  }
+}
+showFiveResults();
