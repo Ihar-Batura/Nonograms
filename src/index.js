@@ -608,3 +608,82 @@ playAgainBtn.addEventListener('click', () => {
   createGameField(gameNow); //отрисовывает этот же уровень (кнопка play again подразумевает играть этот же уровень)
   resetTimer(); // сбрасываем таймер на ноль
 });
+
+/* SAVE GAME IN LOCAL STORAGE*/
+const saveBtn = document.querySelector('.save-btn');
+function saveGame() {
+  const cells = document.querySelectorAll('.cell'); // находим все игровые ячейки
+  const array = [];
+  cells.forEach((cell) => {
+    if (
+      cell.innerText === '1' &&
+      !cell.classList.value.includes('fill') &&
+      !cell.classList.value.includes('cross')
+    ) {
+      array.push(1);
+    } else if (
+      cell.innerText === '1' &&
+      cell.classList.value.includes('fill')
+    ) {
+      array.push(2);
+    } else if (
+      cell.innerText === '1' &&
+      cell.classList.value.includes('cross')
+    ) {
+      array.push(3);
+    } else if (
+      cell.innerText === '0' &&
+      !cell.classList.value.includes('fill') &&
+      !cell.classList.value.includes('cross')
+    ) {
+      array.push(0);
+    } else if (
+      cell.innerText === '0' &&
+      cell.classList.value.includes('fill')
+    ) {
+      array.push(-1);
+    } else if (
+      cell.innerText === '0' &&
+      cell.classList.value.includes('cross')
+    ) {
+      array.push(-2);
+    }
+  });
+  localStorage.setItem('nonogramLastGame', JSON.stringify(array));
+  // логика - проходимся по ячейкам, у каждой ячейки может быть три состояния в зависимости от содержнаия ячейки. Создаем массив, после при отрисовке изменяем значение и добавляем нужный класс для стилий
+}
+
+saveBtn.addEventListener('click', saveGame);
+
+/* CONTINUE LAST GAME*/
+
+const continueGameBtn = document.querySelector('.continue-btn');
+
+continueGameBtn.addEventListener('click', () => {
+  const lastSaveGame = JSON.parse(localStorage.getItem('nonogramLastGame'));
+
+  gameField.innerHTML = ''; // очишает поле для игры
+  createGameField(gameNow); //отрисовывает этот же уровень
+  const cells = document.querySelectorAll('.cell'); // находим все игровые ячейки
+  let counter = 0;
+  cells.forEach((cell) => {
+    if (lastSaveGame[counter] === 1) {
+      cell.innerText = '1';
+    } else if (lastSaveGame[counter] === 2) {
+      cell.innerText = '1';
+      cell.classList.add('fill');
+    } else if (lastSaveGame[counter] === 3) {
+      cell.innerText = '1';
+      cell.classList.add('cross');
+    } else if (lastSaveGame[counter] === 0) {
+      cell.innerText = '0';
+    } else if (lastSaveGame[counter] === -1) {
+      cell.innerText = '0';
+      cell.classList.add('fill');
+    } else if (lastSaveGame[counter] === -2) {
+      cell.innerText = '0';
+      cell.classList.add('cross');
+    }
+    counter++;
+  });
+});
