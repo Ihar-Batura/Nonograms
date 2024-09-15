@@ -597,6 +597,7 @@ function showModal() {
   modalTime.innerText = `${hours}:${minutes}:${seconds}`;
   modal.classList.add('show-modal');
   clearInterval(interval); // stop timer
+  saveResult(); // save result in local storage
 }
 
 const playAgainBtn = document.querySelector('.modal-btn');
@@ -687,3 +688,38 @@ continueGameBtn.addEventListener('click', () => {
     counter++;
   });
 });
+
+/* SAVE LAST 5 RESULTS*/
+
+function saveResult() {
+  let name;
+  let difficulty; //получаем имя и сложность нонограммы
+  nonograms.forEach((nonogram) => {
+    if (nonogram.matrix === gameNow) {
+      name = nonogram.name;
+      difficulty = nonogram.difficulty;
+    }
+  });
+
+  const hours = document.querySelector('.interval-hours').innerHTML;
+  const minutes = document.querySelector('.interval-minutes').innerHTML;
+  const seconds = document.querySelector('.interval-seconds').innerHTML;
+  const time = `${hours}:${minutes}:${seconds}`;
+  const userResult = {
+    name: `${name}`,
+    difficulty: `${difficulty}`,
+    result: `${time}`,
+  };
+
+  // логика - делаем запрос в локал сторадж, если есть массив с результатами получаем его добавляем новый результат сохраняем снова в локал сторадж. Если  это первый результат, создаем массив и сохраняем в локал сторадж
+  const resultLSArray = JSON.parse(localStorage.getItem('resultList'));
+  if (resultLSArray === null) {
+    const usersResults = [];
+    usersResults.push(userResult);
+    localStorage.setItem('resultList', JSON.stringify(usersResults));
+  } else {
+    let resultArray = resultLSArray;
+    resultArray.push(userResult);
+    localStorage.setItem('resultList', JSON.stringify(resultArray));
+  }
+}
