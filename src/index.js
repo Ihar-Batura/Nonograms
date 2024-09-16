@@ -1,12 +1,255 @@
 import './style.css';
 
-const btnBurger = document.querySelector('.burger-menu');
-const header = document.querySelector('.header-container');
+/* START CREATE BODY */
+const body = document.querySelector('body');
+const headerEl = document.createElement('header');
+headerEl.className = 'header';
+headerEl.innerHTML = `
+<div class="wrapper">
+        <div class="header-container">
+          <h1><a href="./index.html">Nonograms</a></h1>
+          <div class="burger-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <nav>
+            <ul class="navigation">
+              <li><a href="#levels">Select level</a></li>
+              <li><a class="random-game" href="#game">Start random</a></li>
+              <li><a href="#table">Score table</a></li>
+              <li><a class="theme-btn" href="#">Change theme</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+`;
+body.appendChild(headerEl);
 
-btnBurger.addEventListener('click', () => {
-  btnBurger.classList.toggle('active');
-  header.classList.toggle('active');
-});
+const main = document.createElement('main');
+main.innerHTML = `
+<div class="wrapper">
+        <section id="levels">
+          <h2>Choose a level for the game:</h2>
+          <div class="level">
+            <p>Easy <span>(5x5)</span></p>
+            <div class="levels-container">
+              <a id="4" href="#game">
+                <div class="level-card">
+                  <div class="level-img img-smile"></div>
+                  <p>smile</p>
+                </div>
+              </a>
+              <a id="1" href="#game">
+                <div class="level-card">
+                  <div class="level-img img-dog"></div>
+                  <p>dog</p>
+                </div>
+              </a>
+              <a id="5" href="#game">
+                <div class="level-card">
+                  <div class="level-img img-scull"></div>
+                  <p>scull</p>
+                </div>
+              </a>
+              <a id="3" href="#game">
+                <div class="level-card">
+                  <div class="level-img img-tower"></div>
+                  <p>tower</p>
+                </div>
+              </a>
+              <a id="2" href="#game">
+                <div class="level-card">
+                  <div class="level-img img-plane"></div>
+                  <p>plane</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="level">
+            <p>Medium <span>(10x10)</span></p>
+            <div class="levels-container">
+              <a id="7" href="#game">
+                <div class="level-card">
+                  <div class="level-img img-question"></div>
+                  <p>question</p>
+                </div>
+              </a>
+              <a id="9" href="#game">
+                <div class="level-card">
+                  <div class="level-img img-note"></div>
+                  <p>note</p>
+                </div>
+              </a>
+              <a id="6" href="#game">
+                <div class="level-card">
+                  <div class="level-img img-tv"></div>
+                  <p>tv</p>
+                </div>
+              </a>
+              <a id="10" href="#game">
+                <div class="level-card">
+                  <div class="level-img img-snail"></div>
+                  <p>snail</p>
+                </div>
+              </a>
+              <a id="8" href="#game">
+                <div class="level-card">
+                  <div class="level-img img-tea"></div>
+                  <p>tea</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="level">
+            <p>Hard <span>(15x15)</span></p>
+            <div class="levels-container">
+              <a id="12" href="#game">
+                <div class="level-card">
+                  <div class="level-img img-clover"></div>
+                  <p>clover</p>
+                </div>
+              </a>
+              <a id="14" href="#game">
+                <div class="level-card">
+                  <div class="level-img img-duck"></div>
+                  <p>duck</p>
+                </div>
+              </a>
+              <a id="15" href="#game">
+                <div class="level-card">
+                  <div class="level-img img-mouse"></div>
+                  <p>mouse</p>
+                </div>
+              </a>
+              <a id="11" href="#game">
+                <div class="level-card">
+                  <div class="level-img img-giraffes"></div>
+                  <p>giraffes</p>
+                </div>
+              </a>
+              <a id="13" href="#game">
+                <div class="level-card">
+                  <div class="level-img img-skittles"></div>
+                  <p>skittles</p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </section>
+        <section id="game">
+          <div class="game-container">
+            <div class="game-field__container">
+              <div class="game-field"></div>
+            </div>
+            <div class="game-buttons">
+              <div class="timer">
+                <span class="interval-hours">00</span>
+                <span class="dots">:</span>
+                <span class="interval-minutes">00</span>
+                <span class="dots">:</span>
+                <span class="interval-seconds">00</span>
+              </div>
+              <button class="game-btn reset-button">Reset game</button>
+              <button class="game-btn solution">Show solution</button>
+              <button class="game-btn">Sound on/off</button>
+              <button class="game-btn save-btn">Save game</button>
+              <button class="game-btn continue-btn">Continue last game</button>
+            </div>
+          </div>
+        </section>
+        <section id="table">
+          <div class="table-container">
+            <table class="table-score">
+              <caption class="table-caption">
+                Score table:
+              </caption>
+              <thead>
+                <tr>
+                  <th>Puzzle name:</th>
+                  <th>Difficulty:</th>
+                  <th>Result:</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+`;
+
+body.appendChild(main);
+
+const footer = document.createElement('footer');
+footer.className = 'footer';
+footer.innerHTML = `
+<div class="wrapper">
+        <div class="footer-container">
+          <p>2024</p>
+          <p>Ihar Batura</p>
+
+          <div class="contacts-container">
+            <a href="https://github.com/Ihar-Batura" target="_blank">
+              <div class="contact-img img-git"></div>
+            </a>
+            <a
+              href="https://discordapp.com/users/925457041785512027/"
+              target="_blank"
+            >
+              <div class="contact-img img-discord"></div>
+            </a>
+            <a href="mailto:a17331582@gmail.com">
+              <div class="contact-img img-email"></div>
+            </a>
+          </div>
+        </div>
+      </div>
+`;
+
+body.appendChild(footer);
+
+const modalEl = document.createElement('div');
+modalEl.className = 'modal';
+modalEl.innerHTML = `
+<div class="modal-window">
+        <h2>
+          "Great! You have solved the nonogram in
+          <span class="modal-time"></span> seconds!"
+        </h2>
+        <div class="modal-img"></div>
+        <button class="game-btn modal-btn">Play again</button>
+      </div>
+`;
+
+body.appendChild(modalEl);
+
+/* FINISH CREATE BODY */
 
 const nonograms = [
   {
@@ -294,6 +537,36 @@ const nonograms = [
     ],
   },
 ];
+
+/* BURGER */
+const btnBurger = document.querySelector('.burger-menu');
+const header = document.querySelector('.header-container');
+
+const burgerList = document.querySelectorAll('.navigation li a');
+let burgerFlag = false;
+
+function openBurger() {
+  burgerFlag = !burgerFlag;
+  if (burgerFlag) {
+    btnBurger.classList.add('active');
+    header.classList.add('active');
+    body.classList.add('unscroll');
+  } else {
+    btnBurger.classList.remove('active');
+    header.classList.remove('active');
+    body.classList.remove('unscroll');
+  }
+}
+
+btnBurger.addEventListener('click', openBurger);
+burgerList.forEach((li) => {
+  li.addEventListener('click', () => {
+    btnBurger.classList.remove('active');
+    header.classList.remove('active');
+    body.classList.remove('unscroll');
+    burgerFlag = false;
+  });
+});
 
 /* START GAME and CREATE FIELD */
 
