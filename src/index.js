@@ -753,3 +753,45 @@ function showFiveResults() {
   }
 }
 showFiveResults();
+
+/* CHANGE THEME */
+
+const themeBtn = document.querySelector('.theme-btn');
+let themeFlag = false;
+
+function changeTheme() {
+  themeFlag = !themeFlag;
+  if (!themeFlag) {
+    document.documentElement.style.setProperty('--clr-text-light', '#e2f0ed');
+    document.documentElement.style.setProperty(
+      '--clr-text-light-hover',
+      '#ecc5bd'
+    );
+    document.documentElement.style.setProperty('--clr-body-light', '#f5edeb');
+    document.documentElement.style.setProperty(
+      '--clr-body-text-light',
+      '#420c0d'
+    );
+    document.documentElement.style.setProperty(
+      '--clr-header-footer-light',
+      '#3d2d66'
+    );
+  } else {
+    document.documentElement.style.setProperty('--clr-text-light', '#d0ef88');
+    document.documentElement.style.setProperty(
+      '--clr-text-light-hover',
+      '#87bf02'
+    );
+    document.documentElement.style.setProperty('--clr-body-light', '#b7badb');
+    document.documentElement.style.setProperty(
+      '--clr-body-text-light',
+      '#282d1b'
+    );
+    document.documentElement.style.setProperty(
+      '--clr-header-footer-light',
+      '#0c103a'
+    );
+  }
+}
+
+themeBtn.addEventListener('click', changeTheme);
