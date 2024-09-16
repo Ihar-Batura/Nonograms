@@ -72,7 +72,7 @@ main.innerHTML = `
               <a id="7" href="#game">
                 <div class="level-card">
                   <div class="level-img img-question"></div>
-                  <p>question</p>
+                  <p>matter</p>
                 </div>
               </a>
               <a id="9" href="#game">
@@ -152,7 +152,7 @@ main.innerHTML = `
               </div>
               <button class="game-btn reset-button">Reset game</button>
               <button class="game-btn solution">Show solution</button>
-              <button class="game-btn">Sound on/off</button>
+              <button class="game-btn sound-btn">Sound <span class="sound-btn__text">off</span></button>
               <button class="game-btn save-btn">Save game</button>
               <button class="game-btn continue-btn">Continue last game</button>
             </div>
@@ -1068,3 +1068,20 @@ function changeTheme() {
 }
 
 themeBtn.addEventListener('click', changeTheme);
+
+/* TURN ON/OFF SOUND */
+
+const soundBtn = document.querySelector('.sound-btn');
+const soundBtnText = document.querySelector('.sound-btn__text');
+let sound = true;
+
+function turnSound() {
+  sound = !sound;
+  if (sound) {
+    soundBtnText.innerText = 'off';
+  } else {
+    soundBtnText.innerText = 'on';
+  }
+}
+
+soundBtn.addEventListener('click', turnSound);
