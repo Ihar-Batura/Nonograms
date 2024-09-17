@@ -26,6 +26,10 @@ module.exports = (env) => {
           test: /\.(jpg|png|svg|jpeg|gif)$/, // изображения
           type: 'asset/resource',
         },
+        {
+          test: /\.(ogg|mp3|wav|mpe?g)$/i, // звуки
+          use: 'file-loader',
+        },
       ],
     },
 

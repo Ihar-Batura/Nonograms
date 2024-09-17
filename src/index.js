@@ -798,6 +798,11 @@ function fillCell() {
     cell.addEventListener('click', () => {
       cell.classList.remove('cross');
       cell.classList.toggle('fill');
+      if (cell.classList.value.includes('fill')) {
+        playFillCell(); // звук при закрашивании
+      } else {
+        playClearCell(); // звук при очистки ячейки
+      }
     })
   );
 }
@@ -812,6 +817,11 @@ function markCell() {
       e.preventDefault();
       cell.classList.remove('fill');
       cell.classList.toggle('cross');
+      if (cell.classList.value.includes('cross')) {
+        playCrossCell(); // звук при перечеркивании ячейки
+      } else {
+        playClearCell(); // звук при очистки ячейки
+      }
     })
   );
 }
@@ -1073,15 +1083,46 @@ themeBtn.addEventListener('click', changeTheme);
 
 const soundBtn = document.querySelector('.sound-btn');
 const soundBtnText = document.querySelector('.sound-btn__text');
-let sound = true;
+let isSound = true;
 
 function turnSound() {
-  sound = !sound;
-  if (sound) {
+  isSound = !isSound;
+  if (isSound) {
     soundBtnText.innerText = 'off';
   } else {
     soundBtnText.innerText = 'on';
   }
 }
 
+import soundFill from './assets/sounds/fillCell.wav';
+import soundCross from './assets/sounds/crossCell.wav';
+import soundClear from './assets/sounds/clearCell.wav';
+
+const audioFill = new Audio(soundFill);
+const audioCross = new Audio(soundCross);
+const audioClear = new Audio(soundClear);
+
 soundBtn.addEventListener('click', turnSound);
+
+function playFillCell() {
+  if (isSound) {
+    audioFill.currentTime = 0;
+    audioFill.play();
+  }
+}
+
+function playClearCell() {
+  if (isSound) {
+    audioClear.currentTime = 0;
+    audioClear.play();
+  }
+}
+
+function playCrossCell() {
+  if (isSound) {
+    audioCross.currentTime = 0;
+    audioCross.play();
+  }
+}
+
+// со звуком пришлось повозиться, добавил file-loader в конфигурационный файл и здесь уже импортировал файлы с музыкай. (до этого была ошибка 404 что файлы не найдены)
