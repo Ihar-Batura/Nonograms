@@ -162,16 +162,17 @@ h2 {
 
 .level {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 40px;
-  margin-top: 20px;
+  flex-direction: column;
+  width: 400px;
+  margin: 0 auto;
+  gap: 15px;
+  margin-top: 40px;
 }
 
 .level > p {
   font-size: 1.5rem;
   font-weight: 500;
-  width: 120px;
+  width: 400px;
   color: var(--clr-body-light);
   background-color: var(--clr-header-footer-light);
   text-align: center;
@@ -195,8 +196,8 @@ h2 {
 }
 
 .level-img {
-  width: 70px;
-  height: 70px;
+  width: 72px;
+  height: 72px;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -271,7 +272,7 @@ p > span {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 600px;
+  width: 520px;
   height: 500px;
 }
 
@@ -575,10 +576,14 @@ tr:nth-child(2n) > td {
     font-size: 2.2rem;
   }
 
+  .level {
+    width: 315px;
+  }
+
   .level > p {
     font-size: 1.2rem;
     font-weight: 400;
-    width: 100px;
+    width: 315px;
   }
 
   p > span {
@@ -586,8 +591,8 @@ tr:nth-child(2n) > td {
   }
 
   .level-img {
-    width: 50px;
-    height: 50px;
+    width: 55px;
+    height: 55px;
   }
 
   .level-card > p {
@@ -622,14 +627,6 @@ tr:nth-child(2n) > td {
     font-size: 1.8rem;
   }
 
-  .level > p {
-    display: none;
-  }
-
-  .level-img {
-    width: 40px;
-    height: 40px;
-  }
   .footer-container p {
     font-size: 1.5rem;
   }
@@ -687,4 +684,10 @@ tr:nth-child(2n) > td {
     max-width: 400px;
     padding: 30px 20px;
   }
+}
+
+/*Sound btn*/
+.sound-btn__text {
+  min-width: 22px;
+  text-align: center;
 }

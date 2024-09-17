@@ -72,7 +72,7 @@ main.innerHTML = `
               <a id="7" href="#game">
                 <div class="level-card">
                   <div class="level-img img-question"></div>
-                  <p>question</p>
+                  <p>matter</p>
                 </div>
               </a>
               <a id="9" href="#game">
@@ -152,7 +152,7 @@ main.innerHTML = `
               </div>
               <button class="game-btn reset-button">Reset game</button>
               <button class="game-btn solution">Show solution</button>
-              <button class="game-btn">Sound on/off</button>
+              <button class="game-btn sound-btn">Sound <span class="sound-btn__text">off</span></button>
               <button class="game-btn save-btn">Save game</button>
               <button class="game-btn continue-btn">Continue last game</button>
             </div>
@@ -798,6 +798,11 @@ function fillCell() {
     cell.addEventListener('click', () => {
       cell.classList.remove('cross');
       cell.classList.toggle('fill');
+      if (cell.classList.value.includes('fill')) {
+        playFillCell(); // звук при закрашивании
+      } else {
+        playClearCell(); // звук при очистки ячейки
+      }
     })
   );
 }
@@ -812,6 +817,11 @@ function markCell() {
       e.preventDefault();
       cell.classList.remove('fill');
       cell.classList.toggle('cross');
+      if (cell.classList.value.includes('cross')) {
+        playCrossCell(); // звук при перечеркивании ячейки
+      } else {
+        playClearCell(); // звук при очистки ячейки
+      }
     })
   );
 }
@@ -1068,3 +1078,51 @@ function changeTheme() {
 }
 
 themeBtn.addEventListener('click', changeTheme);
+
+/* TURN ON/OFF SOUND */
+
+const soundBtn = document.querySelector('.sound-btn');
+const soundBtnText = document.querySelector('.sound-btn__text');
+let isSound = true;
+
+function turnSound() {
+  isSound = !isSound;
+  if (isSound) {
+    soundBtnText.innerText = 'off';
+  } else {
+    soundBtnText.innerText = 'on';
+  }
+}
+
+import soundFill from './assets/sounds/fillCell.wav';
+import soundCross from './assets/sounds/crossCell.wav';
+import soundClear from './assets/sounds/clearCell.wav';
+
+const audioFill = new Audio(soundFill);
+const audioCross = new Audio(soundCross);
+const audioClear = new Audio(soundClear);
+
+soundBtn.addEventListener('click', turnSound);
+
+function playFillCell() {
+  if (isSound) {
+    audioFill.currentTime = 0;
+    audioFill.play();
+  }
+}
+
+function playClearCell() {
+  if (isSound) {
+    audioClear.currentTime = 0;
+    audioClear.play();
+  }
+}
+
+function playCrossCell() {
+  if (isSound) {
+    audioCross.currentTime = 0;
+    audioCross.play();
+  }
+}
+
+// со звуком пришлось повозиться, добавил file-loader в конфигурационный файл и здесь уже импортировал файлы с музыкай. (до этого была ошибка 404 что файлы не найдены)
