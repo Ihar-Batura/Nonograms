@@ -879,6 +879,7 @@ function showModal() {
   const seconds = document.querySelector('.interval-seconds').innerHTML;
   modalTime.innerText = `${hours}:${minutes}:${seconds}`;
   modal.classList.add('show-modal');
+  playWin();
   clearInterval(interval); // stop timer
   saveResult(); // save result in local storage
   showFiveResults();
@@ -1097,10 +1098,12 @@ function turnSound() {
 import soundFill from './assets/sounds/fillCell.wav';
 import soundCross from './assets/sounds/crossCell.wav';
 import soundClear from './assets/sounds/clearCell.wav';
+import soundWin from './assets/sounds/win.wav';
 
 const audioFill = new Audio(soundFill);
 const audioCross = new Audio(soundCross);
 const audioClear = new Audio(soundClear);
+const audioWin = new Audio(soundWin);
 
 soundBtn.addEventListener('click', turnSound);
 
@@ -1122,6 +1125,13 @@ function playCrossCell() {
   if (isSound) {
     audioCross.currentTime = 0;
     audioCross.play();
+  }
+}
+
+function playWin() {
+  if (isSound) {
+    audioWin.currentTime = 0;
+    audioWin.play();
   }
 }
 
