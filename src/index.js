@@ -2,6 +2,10 @@ import './style.css';
 
 /* START CREATE BODY */
 const body = document.querySelector('body');
+const bodyWrap = document.createElement('div');
+bodyWrap.className = 'body-wrapper';
+body.appendChild(bodyWrap);
+
 const headerEl = document.createElement('header');
 headerEl.className = 'header';
 headerEl.innerHTML = `
@@ -24,7 +28,7 @@ headerEl.innerHTML = `
         </div>
       </div>
 `;
-body.appendChild(headerEl);
+bodyWrap.appendChild(headerEl);
 
 const main = document.createElement('main');
 main.innerHTML = `
@@ -204,7 +208,7 @@ main.innerHTML = `
       </div>
 `;
 
-body.appendChild(main);
+bodyWrap.appendChild(main);
 
 const footer = document.createElement('footer');
 footer.className = 'footer';
@@ -232,7 +236,7 @@ footer.innerHTML = `
       </div>
 `;
 
-body.appendChild(footer);
+bodyWrap.appendChild(footer);
 
 const modalEl = document.createElement('div');
 modalEl.className = 'modal';
@@ -247,7 +251,7 @@ modalEl.innerHTML = `
       </div>
 `;
 
-body.appendChild(modalEl);
+bodyWrap.appendChild(modalEl);
 
 /* FINISH CREATE BODY */
 
