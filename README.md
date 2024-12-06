@@ -1,3 +1,6 @@
 # Nonograms
+### Task: 
+https://github.com/rolling-scopes-school/tasks/tree/master/tasks/nonograms
 
-## https://ihar-batura.github.io/Nonograms/dist/
+### Deploy:
+https://ihar-batura.github.io/Nonograms/dist/
